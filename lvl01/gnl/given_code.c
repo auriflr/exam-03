@@ -6,14 +6,14 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:21:19 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/23 12:21:38 by babyf            ###   ########.fr       */
+/*   Updated: 2025/11/24 17:34:15 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include <fcntl.h>
 
 //cc broken_gnl.c -Wall -Wextra -Werror -D BUFFER_SIZE=3 -o gnl
