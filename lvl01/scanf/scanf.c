@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filter.c                                           :+:      :+:    :+:   */
+/*   scanf.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 16:38:42 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/23 12:15:55 by babyf            ###   ########.fr       */
+/*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
+/*   Updated: 2025/11/23 12:20:54 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Study the new functions and make a notion spreadsheet */
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <fcntl.h>
-
-# define BUFFER_SIZE 10000 + 1
 
