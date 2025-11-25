@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:38:42 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/25 17:42:35 by babyf            ###   ########.fr       */
+/*   Updated: 2025/11/25 18:56:02 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ void	ft_filter(char *buffer, const char *target)
 	/* start a while loop */
 	while (buffer[i])
 	{
-		/* initialize second counter */
-		/* check for any occurence of arg s [while loop]*/
+		j = 0;
+		while (target[j] && buffer [i + j] != '\0')
+			j++;
+		/* compare to the lenght of the target */
+		if (j == target_len)
+		{
+
+		}
 		/* init third counter */
 		/* once the occurance is found [if]
 			write * for occurence of arg s 
