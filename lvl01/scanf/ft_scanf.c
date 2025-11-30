@@ -6,14 +6,14 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/30 16:38:45 by babyf            ###   ########.fr       */
+/*   Updated: 2025/11/30 17:21:04 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* it only scans through strings (s), integers (d) and characters (c)
+/* 
+it only scans through strings (s), integers (d) and characters (c)
 The fgetc() function obtains the next input character (if present) from the stream 
 pointed at by stream, or the next character pushed back on the stream via ungetc(3).
-
 */
 
 #include <stdarg.h>
@@ -23,98 +23,77 @@ pointed at by stream, or the next character pushed back on the stream via ungetc
 /* skip spaces */
 int match_space(FILE *f)
 {
-    int	ch;
+    int	input;
 	
-	ch = fgetc(f);
-	if (ch == EOF && ferror(f))
+	input = fgetc(f);
+	while (input != EOF && isspace(input))
+		input = fgetc(f);
+	if (input == EOF)
 		return (-1);
-	while (ch != EOF)
-	{
-		if (isspace(ch))
-		{
-			ungetc(ch, f);
-			break ;
-		}
-		ch = fgetc(f);
-	}
-	if (ferror(f))
-		return (-1);
-    return (1);
+	ungetc(input, f);
+	return (1);
 }
 
 /* verify one specific character */
 int match_char(FILE *f, char c)
 {
-	int	ch;
+	int	input;
 
-	ch = fgetc(f);
-	if (ch == c)
+	input = fgetc(f);
+	if (input == EOF)
+		return (-1);
+	if (input == c)
 		return (1);
-	if (ch != EOF)
-		ungetc(ch, f);
-	return (-1);
+	ungetc(input, f);
+	return (1);
 }
 
 /* scan one character (%c) */
 int scan_char(FILE *f, va_list ap)
 {
-	int		ch;
+	int	input;
 	char	*cp; /* char paramenter */
 	
-	ch = fgetc(f);
-	cp = va_arg(ap, char*);
-	if (ch == EOF)
+	input = fgetc(f);
+	if (input == EOF)
 		return (-1);
-	*cp = (char)ch;
+	cp = va_arg(ap, char *);
+	*cp = input;
 	return (1);
 }
 
 /* scan one integer (%d) */
 int scan_int(FILE *f, va_list ap)
 {
-	int	ch;
+	int	input;
 	int	sign;
+	int	count;
 	int	value;
-	int	*ip; /* int parameter */
-	int count;
+	int	*ip;
 
 	sign = 1;
 	value = 0;
 	count = 0;
-	ch = fgetc(f);
-	ip = va_arg(ap, int *);
-	if (ch == EOF)
+	input = fgetc(f);
+	if (input == EOF)
 		return (-1);
-	/* skip the spaces */
-	if (isspace(ch))
-		ch = fgetc(f);
-	/* handle sign */
-	if (ch == '-')
+	if (input == '-' || input == '+')
 	{
-		sign = -1;
-		ch = fgetc(f);
+		if (input == '-')
+			sign = -1;
+		input = fgetc(f);
 	}
-	else if (ch == '+')
+	while (input != EOF && isspace(input))
 	{
-		ch = fgetc(f);
-	}
-	/* check that the first character is a digit */
-	if (!isdigit(ch))
-	{
-		ungetc(ch, f);
-		return (-1);
-	}
-	/* read the digits and make the number */
-	while (isdigit(ch))
-	{
-		value = value * 10 + (ch - '0');
+		value = value * 10 + (input - '0');
 		count++;
-		ch = fgetc(f);
+		input = fgetc(f);
 	}
-	if (ch != EOF)
-		ungetc(ch, f);
+	if (input != EOF)
+		ungetc(input, f);
 	if (count == 0)
 		return (-1);
+	ip = va_arg(ap, int *);
 	*ip = value * sign;
 	return (1);
 }
@@ -122,28 +101,26 @@ int scan_int(FILE *f, va_list ap)
 /* scan one string (%s) */
 int scan_string(FILE *f, va_list ap)
 {
-    int		ch;
-	char	*sp; /* string parameter */
-	int		i; 
+    int		input;
+	char	*sp;
+	int		i;
 
-	i = 0;
-	ch = 0;
 	sp = va_arg(ap, char *);
-	while (ch != EOF && isspace(ch))
-		ch = fgetc(f);
-	if (ch == EOF)
+	i = 0;
+	input = fgetc(f);
+	if (input == EOF)
 		return (-1);
-	do 
-	{
-		sp[i] = ch;
+	while (input != EOF && !isspace(input))
+	{	
+		sp[i] = input;
 		i++;
-		ch = fgetc(f);
-	} while (ch != EOF && !isspace(ch));
+		input = fgetc(f);
+	}
+	if (input != EOF)
+		ungetc(input, f);
 	sp[i] = '\0';
-	if (ch != EOF)
-		ch = ungetc(ch, f);
 	if (i == 0)
-		return (-1);
+		return (0);
 	return (1);
 }
 
@@ -216,20 +193,17 @@ int ft_scanf(const char *format, ...)
 int main(void)
 {
 	int x;
-    char str[100];
-    char c;
+    // char str[100];
+    // char c;
 
-    // Leer: número, espacio, string, espacio, carácter
-    int converted = ft_scanf("%d %s %c", &x, str, &c);
+    int converted = ft_scanf("%d", &x);
     
-    printf("Convertidos: %d\n", converted);
-    printf("Número: %d, String: %s, Carácter: %c\n", x, str, c);
+    printf("Converted: %d\n", converted);
+    printf("Num: %d\n", x);
     
     return 0;
 }
 
 /* 
-conversion with string: no output with printf user 
-conversion with char: ok
-conversion of numbers: random memory address that nobody asked for
+think the problem might be the main
 */
