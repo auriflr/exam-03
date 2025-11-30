@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   complex_gnl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 17:34:40 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/30 16:34:58 by babyf            ###   ########.fr       */
+/*   Created: 2025/11/30 17:50:21 by babyf             #+#    #+#             */
+/*   Updated: 2025/11/30 17:50:41 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
 
-int main(void)
-{
-	char c;
-
-	scanf("%c", &c);
-	printf("You entered: %c", c);
-	return (0);
-}
