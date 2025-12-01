@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/30 17:21:04 by babyf            ###   ########.fr       */
+/*   Updated: 2025/12/01 15:28:33 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,16 @@ int scan_string(FILE *f, va_list ap)
 
 	sp = va_arg(ap, char *);
 	i = 0;
-	input = fgetc(f);
-	if (input == EOF)
-		return (-1);
-	while (input != EOF && !isspace(input))
-	{	
-		sp[i] = input;
-		i++;
+	while (1)
+	{
 		input = fgetc(f);
+		if (input == EOF)
+			return (EOF);
+		if (isspace(input))
+		{
+			
+		}		
 	}
-	if (input != EOF)
-		ungetc(input, f);
-	sp[i] = '\0';
-	if (i == 0)
-		return (0);
 	return (1);
 }
 
