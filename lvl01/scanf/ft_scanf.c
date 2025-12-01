@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/01 15:28:33 by babyf            ###   ########.fr       */
+/*   Updated: 2025/12/01 17:49:34 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int match_space(FILE *f)
 	while (input != EOF && isspace(input))
 		input = fgetc(f);
 	if (input == EOF)
-		return (-1);
+		return (EOF);
 	ungetc(input, f);
 	return (1);
 }
@@ -42,10 +42,10 @@ int match_char(FILE *f, char c)
 	input = fgetc(f);
 	if (input == EOF)
 		return (-1);
+	ungetc(input, f);
 	if (input == c)
 		return (1);
-	ungetc(input, f);
-	return (1);
+	return (-1);
 }
 
 /* scan one character (%c) */
@@ -67,34 +67,30 @@ int scan_int(FILE *f, va_list ap)
 {
 	int	input;
 	int	sign;
-	int	count;
-	int	value;
 	int	*ip;
+	int	value;
 
 	sign = 1;
 	value = 0;
-	count = 0;
+	ip = va_arg(ap, int *);
 	input = fgetc(f);
-	if (input == EOF)
-		return (-1);
 	if (input == '-' || input == '+')
 	{
 		if (input == '-')
 			sign = -1;
 		input = fgetc(f);
 	}
-	while (input != EOF && isspace(input))
+	while (1)
 	{
+		if (!isdigit(input))
+		{
+			ungetc(input, f);
+			break;
+		}
 		value = value * 10 + (input - '0');
-		count++;
 		input = fgetc(f);
 	}
-	if (input != EOF)
-		ungetc(input, f);
-	if (count == 0)
-		return (-1);
-	ip = va_arg(ap, int *);
-	*ip = value * sign;
+	*ip = sign * value;
 	return (1);
 }
 
@@ -103,10 +99,10 @@ int scan_string(FILE *f, va_list ap)
 {
     int		input;
 	char	*sp;
-	int		i;
+	int 	i;
 
-	sp = va_arg(ap, char *);
 	i = 0;
+	sp = va_arg(ap, char *);
 	while (1)
 	{
 		input = fgetc(f);
@@ -114,8 +110,11 @@ int scan_string(FILE *f, va_list ap)
 			return (EOF);
 		if (isspace(input))
 		{
-			
-		}		
+			ungetc(input, f);
+			break ;
+		}
+		sp[i] = input;
+		i++;
 	}
 	return (1);
 }
@@ -155,7 +154,7 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap)
 		if (*format == '%')
 		{
 			format++;
-			if (match_conv(f, &format, ap) != 1)
+			if (match_conv(f, &format, ap) == -1)
 				break;
 			else
 				nconv++;
@@ -165,7 +164,7 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap)
 			if (match_space(f) == -1)
 				break;
 		}
-		else if (match_char(f, *format) != 1)
+		else if (match_char(f, *format) == -1)
 			break;
 		format++;
 	}
@@ -188,18 +187,9 @@ int ft_scanf(const char *format, ...)
 
 int main(void)
 {
-	int x;
-    // char str[100];
-    // char c;
+	char	n[10];
 
-    int converted = ft_scanf("%d", &x);
-    
-    printf("Converted: %d\n", converted);
-    printf("Num: %d\n", x);
-    
-    return 0;
+	ft_scanf("%s", &n);
+	printf("User said: %s\n", n);
+	return (1);
 }
-
-/* 
-think the problem might be the main
-*/
