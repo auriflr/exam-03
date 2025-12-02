@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/01 17:49:34 by babyf            ###   ########.fr       */
+/*   Updated: 2025/12/02 17:55:52 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ int ft_scanf(const char *format, ...)
 
 int main(void)
 {
+	int		num;
+	char	c;
 	char	n[10];
 
 	ft_scanf("%s", &n);
