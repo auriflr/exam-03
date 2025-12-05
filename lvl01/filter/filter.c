@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:38:42 by babyf             #+#    #+#             */
-/*   Updated: 2025/11/28 17:10:08 by babyf            ###   ########.fr       */
+/*   Updated: 2025/12/05 13:54:17 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	ft_filter(char *buffer, const char *target)
 		/* check for occurence at the current position */
 		while (target[j] && buffer[i + j] == target[j])
 			j++;
+		/* isolate the character */
 		if (j == target_len)
 		{
-			/* now i need to write the asterisk*/
+			/* find the occurrence and write the asterisk*/
 			k = 0;
 			while (k < target_len)
 			{
@@ -72,12 +73,13 @@ int	main(int ac, char **av)
 
 	result = NULL;
 	total = 0;
+	/* now parse */
 	if (ac != 2 || av[1][0] == '\0')
 		return (1);
 	while ((bytes = read(0, tmp, BUFFER_SIZE)) > 0)
 	{
 		/* now with realloc () i need to expand the memory of 
-		the buffer to accomodate the new characters*/
+		the buffer to accomodate the new characters */
 		buffer = realloc (result, total + bytes + 1);
 		if (!buffer)
 		{
