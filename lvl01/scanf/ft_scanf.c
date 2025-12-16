@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_scanf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/02 17:55:52 by babyf            ###   ########.fr       */
+/*   Updated: 2025/12/16 14:13:00 by afloris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,9 @@ int scan_string(FILE *f, va_list ap)
 	int 	i;
 
 	i = 0;
+	match_space(f);
 	sp = va_arg(ap, char *);
-	while (1)
+	while ((input = fgetc(f)) != EOF && !isspace(input))
 	{
 		input = fgetc(f);
 		if (input == EOF)
@@ -187,9 +188,7 @@ int ft_scanf(const char *format, ...)
 
 int main(void)
 {
-	int		num;
-	char	c;
-	char	n[10];
+	char	n[80];
 
 	ft_scanf("%s", &n);
 	printf("User said: %s\n", n);
