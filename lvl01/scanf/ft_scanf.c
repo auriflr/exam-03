@@ -6,7 +6,7 @@
 /*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/16 15:09:35 by afloris          ###   ########.fr       */
+/*   Updated: 2025/12/16 17:10:26 by afloris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@ int match_space(FILE *f)
     int	input;
 	
 	input = fgetc(f);
+	/*
+	do {
+		input = fgetc(f);
+	} while (isspace(input) && input != EOF)
+	*/
 	while (input != EOF && isspace(input))
 		input = fgetc(f);
 	if (input == EOF)
-		return (EOF);
+		return (-1);
 	ungetc(input, f);
 	return (1);
 }
@@ -42,9 +47,9 @@ int match_char(FILE *f, char c)
 	input = fgetc(f);
 	if (input == EOF)
 		return (-1);
-	ungetc(input, f);
 	if (input == c)
 		return (1);
+	ungetc(input, f);
 	return (-1);
 }
 
@@ -60,6 +65,7 @@ int scan_char(FILE *f, va_list ap)
 	cp = va_arg(ap, char *);
 	*cp = input;
 	return (1);
+/* no ungetting in this function */
 }
 
 /* scan one integer (%d) */
