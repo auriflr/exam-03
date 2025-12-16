@@ -6,7 +6,7 @@
 /*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/16 14:13:00 by afloris          ###   ########.fr       */
+/*   Updated: 2025/12/16 15:09:35 by afloris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,8 @@ int scan_string(FILE *f, va_list ap)
 	i = 0;
 	match_space(f);
 	sp = va_arg(ap, char *);
-	while ((input = fgetc(f)) != EOF && !isspace(input))
+	while ((input = fgetc(f)) != EOF)
 	{
-		input = fgetc(f);
 		if (input == EOF)
 			return (EOF);
 		if (isspace(input))
@@ -114,9 +113,11 @@ int scan_string(FILE *f, va_list ap)
 			ungetc(input, f);
 			break ;
 		}
-		sp[i] = input;
-		i++;
+		sp[i++] = input;
 	}
+	if (input == EOF && i == 0)
+		return (-1);
+	sp[i] = '\0';
 	return (1);
 }
 
@@ -190,6 +191,7 @@ int main(void)
 {
 	char	n[80];
 
+	printf("Enter: ");
 	ft_scanf("%s", &n);
 	printf("User said: %s\n", n);
 	return (1);
