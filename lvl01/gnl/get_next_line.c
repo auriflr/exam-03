@@ -6,7 +6,7 @@
 /*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:21:19 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/13 10:57:35 by afloris          ###   ########.fr       */
+/*   Updated: 2025/12/18 18:40:16 by afloris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*get_next_line(int fd)
 	return (ft_strdup(line));
 }
 
-/*
+
 int	main()
 {
 	int		fd;
@@ -79,5 +79,3 @@ int	main()
 		line = get_next_line(fd);
 	}
 }
-*/
-
