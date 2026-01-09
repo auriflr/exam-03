@@ -6,7 +6,7 @@
 /*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/16 17:10:26 by afloris          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:23:04 by afloris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ pointed at by stream, or the next character pushed back on the stream via ungetc
 /* skip spaces */
 int match_space(FILE *f)
 {
-    int	input;
-	
-	input = fgetc(f);
-	/*
-	do {
-		input = fgetc(f);
-	} while (isspace(input) && input != EOF)
-	*/
-	while (input != EOF && isspace(input))
-		input = fgetc(f);
-	if (input == EOF)
-		return (-1);
-	ungetc(input, f);
-	return (1);
+    int input;
+
+    while ((input = fgetc(f)) != EOF)
+    {
+        if (!isspace(input))
+        {
+            ungetc(input, f);
+            return (1);
+        }
+    }
+    return (-1);
 }
 
 /* verify one specific character */
@@ -71,10 +68,11 @@ int scan_char(FILE *f, va_list ap)
 /* scan one integer (%d) */
 int scan_int(FILE *f, va_list ap)
 {
-	int	input;
-	int	sign;
-	int	*ip;
-	int	value;
+	int			input;
+	int			sign;
+	int			*ip;
+	int			in_digit;
+	long long	value;
 
 	sign = 1;
 	value = 0;
@@ -86,16 +84,14 @@ int scan_int(FILE *f, va_list ap)
 			sign = -1;
 		input = fgetc(f);
 	}
-	while (1)
+	while (isdigit(input))
 	{
-		if (!isdigit(input))
-		{
-			ungetc(input, f);
-			break;
-		}
+		in_digit = 1;
 		value = value * 10 + (input - '0');
 		input = fgetc(f);
 	}
+	if (!in_digit)
+		return (-1);
 	*ip = sign * value;
 	return (1);
 }
@@ -112,8 +108,8 @@ int scan_string(FILE *f, va_list ap)
 	sp = va_arg(ap, char *);
 	while ((input = fgetc(f)) != EOF)
 	{
-		if (input == EOF)
-			return (EOF);
+		// if (input == EOF)
+		// 	return (EOF);
 		if (isspace(input))
 		{
 			ungetc(input, f);
@@ -193,12 +189,26 @@ int ft_scanf(const char *format, ...)
 	return (ret);
 }
 
-int main(void)
-{
-	char	n[80];
+// int main(void)
+// {
+// 	char	n[80];
+// 	int		d;
+// 	char	c;
 
-	printf("Enter: ");
-	ft_scanf("%s", &n);
-	printf("User said: %s\n", n);
-	return (1);
-}
+// 	printf("Enter string: ");
+// 	ft_scanf("%s", n);
+// 	printf("User said: %s\n", n);
+
+// 	printf("Enter character: ");
+// 	ft_scanf(" %c", &c);
+// 	printf("User said: %c\n", c);
+
+// 	printf("Enter number: ");
+// 	ft_scanf ("%d", &d);
+// 	printf("User said: %d\n", d);
+	
+// 	return (1);
+// }
+
+/* should fail with an invalid integer (doesn't) 
+add a condition ???*/
