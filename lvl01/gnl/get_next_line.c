@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:21:19 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/09 15:57:09 by babyf            ###   ########.fr       */
+/*   Updated: 2026/01/10 18:01:09 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_strlen(char *str)
 {
 	int	len;
 
+/* always remember to check that the string exists */
 	if (!str)
 		return (0);
 	len = 0;
@@ -32,12 +33,16 @@ char	*ft_strchcpy(char *dst, char *src, char c)
 	i = 0;
 	if (!dst || !src)
 		return (NULL);
+/* first copy src into dst */
 	while (src[i] && src[i] != c)
 	{
 		dst[i] = src[i];
 		i++;
 	}
+/* then, after copying, if the character pointed to by src is c,
+copy it into dst */
 	if (src[i] == c)
+	/* remember to increment here */
 		dst[i++] = c;
 	dst[i] = '\0';
 	return (dst);
@@ -46,15 +51,24 @@ char	*ft_strchcpy(char *dst, char *src, char c)
 char	*ft_strdup(char *str)
 {
 	int		len;
+	int		i;
 	char	*res;
 
 	if (!str)
 		return (NULL);
+	i = 0;
 	len = ft_strlen(str);
-	res = (char *) malloc (sizeof(char) * len + 1);
+/* remember the + 1 to accomodate '\0'*/
+	res = (char *) malloc (sizeof(char) * (len + 1));
+	while (str[i])
+	{
+		res[i] = str[i];
+		i++;
+	}
 	if (!res)
 		return (NULL);
-	ft_strchcpy(res, str, '\0');
+	/* remember to either null-terminate or copy '\0'*/
+	res[len] = '\0';
 	return (res);
 }
 
@@ -136,7 +150,7 @@ char	*fill_line(char **buff)
 	nl = ft_strchr(*buff, '\n');
 	if (nl)
 	{
-		line = (char *) malloc (sizeof(char) * (nl - *buff) + 2);
+		line = (char *) malloc (sizeof(char) * ((nl - *buff) + 2));
 		if (!line)
 			return (NULL);
 		line = ft_strchcpy(line, *buff, '\n');
