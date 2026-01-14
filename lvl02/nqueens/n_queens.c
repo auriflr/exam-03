@@ -6,24 +6,81 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:44:41 by babyf             #+#    #+#             */
-/*   Updated: 2025/12/04 16:22:03 by babyf            ###   ########.fr       */
+/*   Updated: 2026/01/14 16:49:33 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-
-int		*print_solutions(int *input)
+void	print_solution(int board[], int n)
 {
+	int		i;
+	char	c;
+	i = 0;
+	while (i < n)
+	{
+		c = board[i] + '0';
+		write (1, &c, 1);
+		write (1, " ", 1);
+		i++;
+	}
+	write (1, "\n", 1);
+}
 
+int	is_safe(int board[], int row, int col)
+{
+	int	i;
+
+	i = 0;
+	while (i < row)
+	{
+		if (board[i] == col || (i - row) == (board[i] - col) || (i - row) == (col - board[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	back_track(int board[], int row, int n, int *count)
+{
+	int	col;
+
+	col = 0;
+	if (row == n)
+	{
+		print_solution(board, n);
+		(*count)++;
+		return ;
+	}
+	while (col < n)
+	{
+		if (is_safe(board, row, col))
+		{
+			board[row] = col;
+			back_track(board, row + 1, n, count);
+		}
+		col++;
+	}
+}
+
+void	solve_queens(int n)
+{
+	int	board[n];
+	int	count;
+
+	count = 0;
+	back_track(board, 0, n, &count);
 }
 
 int	main(int ac, char **av)
 {
-	int	col;
+	int	n;
 
-	if (ac != 2 || !ft_isdigit(av[1]))
+	if (ac != 2)
 		return (-1);
-	/* atoi the string? */
+	n = atoi(av[1]);
+	solve_queens(n);
+	return(0);
 }
