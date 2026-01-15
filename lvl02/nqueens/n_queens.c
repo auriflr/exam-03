@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:44:41 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/14 16:49:33 by babyf            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:44:40 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	print_solution(int board[], int n)
+void	put_array(int board[], int n)
 {
 	int		i;
 	char	c;

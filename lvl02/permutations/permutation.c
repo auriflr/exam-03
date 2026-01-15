@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:18:57 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/14 17:31:19 by babyf            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:51:40 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_permutation(char *str, int start, int end)
 {
 	int	i;
 
+	i = 0;
 	if (start == end)
 		put_str(str);
 	else
