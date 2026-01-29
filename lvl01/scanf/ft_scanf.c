@@ -189,26 +189,26 @@ int ft_scanf(const char *format, ...)
 	return (ret);
 }
 
-// int main(void)
-// {
-// 	char	n[80];
-// 	int		d;
-// 	char	c;
+int main(void)
+{
+	char	n[80];
+	int		d;
+	char	c;
 
-// 	printf("Enter string: ");
-// 	ft_scanf("%s", n);
-// 	printf("User said: %s\n", n);
+	printf("Enter string: ");
+	ft_scanf("%s", n);
+	printf("User said: %s\n", n);
 
-// 	printf("Enter character: ");
-// 	ft_scanf(" %c", &c);
-// 	printf("User said: %c\n", c);
+	printf("Enter character: ");
+	ft_scanf(" %c", &c);
+	printf("User said: %c\n", c);
 
-// 	printf("Enter number: ");
-// 	ft_scanf ("%d", &d);
-// 	printf("User said: %d\n", d);
+	printf("Enter number: ");
+	ft_scanf ("%d", &d);
+	printf("User said: %d\n", d);
 	
-// 	return (1);
-// }
+	return (1);
+}
 
 /* should fail with an invalid integer (doesn't) 
 add a condition ???*/

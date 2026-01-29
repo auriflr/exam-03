@@ -6,13 +6,13 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 16:57:55 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/27 17:05:16 by babyf            ###   ########.fr       */
+/*   Updated: 2026/01/29 15:46:19 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
 	char	*new;
 	int		i;
@@ -21,7 +21,7 @@ char	ft_strdup(char *str)
 	i = 0;
 	if (!str)
 		return (NULL);
-	if (str[i])
+	while (str[i])
 		i++;
 	new = (char *) malloc (i + 1);
 	if (!new)
