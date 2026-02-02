@@ -6,13 +6,11 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:44:41 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/15 09:44:40 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:34:29 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "n_queens.h"
 
 void	put_array(int board[], int n)
 {
@@ -43,14 +41,14 @@ int	is_safe(int board[], int row, int col)
 	return (1);
 }
 
-void	back_track(int board[], int row, int n, int *count)
+void	ft_backtrack(int board[], int row, int n, int *count)
 {
 	int	col;
 
 	col = 0;
 	if (row == n)
 	{
-		print_solution(board, n);
+		put_array(board, n);
 		(*count)++;
 		return ;
 	}
@@ -59,19 +57,19 @@ void	back_track(int board[], int row, int n, int *count)
 		if (is_safe(board, row, col))
 		{
 			board[row] = col;
-			back_track(board, row + 1, n, count);
+			ft_backtrack(board, row + 1, n, count);
 		}
 		col++;
 	}
 }
 
-void	solve_queens(int n)
+void	ft_solve(int n)
 {
 	int	board[n];
 	int	count;
 
 	count = 0;
-	back_track(board, 0, n, &count);
+	ft_backtrack(board, 0, n, &count);
 }
 
 int	main(int ac, char **av)
@@ -81,6 +79,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (-1);
 	n = atoi(av[1]);
-	solve_queens(n);
+	ft_solve(n);
 	return(0);
 }

@@ -6,13 +6,11 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:46:35 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/15 16:43:53 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:34:39 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "powerset.h"
 
 void	parse_set(int *set, char **av, int size)
 {

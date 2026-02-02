@@ -6,12 +6,11 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:46:53 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/27 15:32:56 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:35:54 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "rip.h"
 
 int	ft_strlen(char *str)
 {

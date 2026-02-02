@@ -6,13 +6,11 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:18:57 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/15 09:51:40 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:33:12 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "permutation.h"
 
 int	ft_strlen(char *str)
 {
@@ -76,6 +74,6 @@ int	main(int ac, char **av)
 	int	n;
 
 	n = ft_strlen(av[1]);
-	ft_permutation(av[1], 0, n-1);
+	ft_permutation(av[1], 0, n - 1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_scanf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afloris <afloris@student.42.fr>            +#+  +:+       +#+        */
+/*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:20:50 by babyf             #+#    #+#             */
-/*   Updated: 2026/01/07 15:23:04 by afloris          ###   ########.fr       */
+/*   Updated: 2026/02/02 17:32:26 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int scan_int(FILE *f, va_list ap)
 	int			input;
 	int			sign;
 	int			*ip;
-	int			in_digit;
+	int			num;
 	long long	value;
 
 	sign = 1;
@@ -86,11 +86,11 @@ int scan_int(FILE *f, va_list ap)
 	}
 	while (isdigit(input))
 	{
-		in_digit = 1;
+		num = 1;
 		value = value * 10 + (input - '0');
 		input = fgetc(f);
 	}
-	if (!in_digit)
+	if (!num)
 		return (-1);
 	*ip = sign * value;
 	return (1);
@@ -172,7 +172,6 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap)
 			break;
 		format++;
 	}
-	
 	if (ferror(f))
 		return EOF;
 	return nconv;
