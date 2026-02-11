@@ -6,11 +6,11 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:44:41 by babyf             #+#    #+#             */
-/*   Updated: 2026/02/02 17:34:29 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/11 17:17:30 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "n_queens.h"
+#include "n_queens.h"b
 
 void	put_array(int board[], int n)
 {
@@ -21,10 +21,11 @@ void	put_array(int board[], int n)
 	{
 		c = board[i] + '0';
 		write (1, &c, 1);
-		write (1, " ", 1);
+		if (i < n - 1)
+			write (1, " ", 1);
 		i++;
 	}
-	write (1, "\n", 1);
+	write (1, "\n", 1);s
 }
 
 int	is_safe(int board[], int row, int col)
