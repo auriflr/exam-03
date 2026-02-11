@@ -60,7 +60,7 @@ void	print_subset(int *set, int size, int mask)
 	write (1, "\n", 1);
 }
 
-void	ft_setsum(int *set, int size, int target)
+void	ft_sumcheck(int *set, int size, int target)
 {
 	int	tot_subset;
 	int	mask;
