@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:46:35 by babyf             #+#    #+#             */
-/*   Updated: 2026/02/02 17:34:39 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/18 16:21:34 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,25 @@ int	ft_sum(int *set, int size, int mask)
 
 void	print_subset(int *set, int size, int mask)
 {
-	int		i;
-	char	c;
+	int	i;
+	int	first = 1;
 
-	i = 0;
-	while (i < size)
+	for (i = 0; i < size; i++)
 	{
 		if (mask & (1 << i))
 		{
-			c = set[i] + '0';
-			write (1, &c, 1);
-			write (1, " ", 1);
+			if (first)
+			{
+				printf("%d", set[i]);
+				first = 0;
+			}
+			else
+				printf(" %d", set[i]);
 		}
-		i++;
 	}
-	write (1, "\n", 1);
+	printf("\n");
 }
+
 
 void	ft_sumcheck(int *set, int size, int target)
 {
@@ -88,6 +91,6 @@ int	main(int ac, char **av)
 	size = ac - 2;
 	int set[size];
 	parse_set(set, av, size);
-	ft_setsum(set, size, n);
+	ft_sumcheck(set, size, n);
 	return (1);
 }
