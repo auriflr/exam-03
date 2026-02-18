@@ -6,7 +6,7 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:18:57 by babyf             #+#    #+#             */
-/*   Updated: 2026/02/02 17:33:12 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/18 17:03:26 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
+/* fix this */
 void	put_str(char *str)
 {
 	int	i;

@@ -6,13 +6,12 @@
 /*   By: babyf <babyf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:44:41 by babyf             #+#    #+#             */
-/*   Updated: 2026/02/13 11:34:43 by babyf            ###   ########.fr       */
+/*   Updated: 2026/02/16 20:26:08 by babyf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_queens.h"
 
-/* fix this function */
 void	put_array(int board[], int n)
 {
 	int		i;
@@ -20,12 +19,12 @@ void	put_array(int board[], int n)
 	i = 0;
 	while (i < n)
 	{
-		fprintf(stdout, "%d", board[i]);
+		printf("%d", board[i]);
 		if (i < n - 1)
-			fprintf(stdout, " ");
+			printf(" ");
 		i++;
 	}
-	fprintf(stdout, "\n");
+	printf("\n");
 }
 
 int	is_safe(int board[], int row, int col)
